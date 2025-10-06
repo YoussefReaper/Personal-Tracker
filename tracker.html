@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="tracker.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Profile</title>
+</head>
+<body>
+    <header>
+        <div class="coins-container">
+            <h2 class="coins-label">
+                <img src="ChatGPT_Image_Oct_6__2025__02_17_15_AM-removebg-preview.png" alt="Coin" class="coin-icon"> 
+                <span class="coins" id="coins">546</span> 
+                <span class='coins-increase' id="coins-increase">+32</span>
+            </h2>
+        </div>
+        <div class="header-title">
+            <h1 class="title">Auro<span class="dark-light-switch" id="dark-light-switch">🌜</span>ore</h1>
+            <!-- <div class="auth-btn-container">
+                <button class="login-btn">Login</button>
+                <button class="signup-btn">Signup</button>
+            </div> -->
+        </div>
+        <!-- <nav class="nav-container">
+            <a class="nav-first-item">Profile</a>
+            <a class="nav-item">LeaderBoard</a>
+            <a class="nav-item">Tracker</a>
+            <a class="nav-item">Tasks</a>
+            <a class="nav-item">Learning Paths</a>
+            <a class="nav-item">TEAMS</a>
+            <a class="nav-item">Portfolio</a>
+            <a class="nav-item">Aura Battle</a>
+        </nav> -->
+    </header>
+    <div class="container">
+        <div class="configuration-panel" id="configuration-panel">
+            <h2>Background</h2>
+            <div class="background-selector">
+                <div class="background-preview" id="background-preview">
+                    <video autoplay muted loop playsinline>
+                        <source src="./Gojo.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <label for="background-upload" class="background-upload-input">Change The Background</label>
+                <input type="file" accept="image/*, video/*" id="background-upload">
+            </div>
+            <button class="which-background main-background" id="main-background">Main Background</button>
+            <button class="which-background pause-background" id="pause-background">Pause Background</button>
+            <button class="which-background break-background" id="break-background">Break Background</button>
+            <!-- <h2>Tracker Settings</h2>
+            <div class="switcher">
+                <label for="always-focus">Always turn on Focus Mode</label>
+                <label class="switch">
+                    <input type="checkbox" id="always-focus">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="switcher">
+                <label for="always-focus">Always turn on Fullscreen</label>
+                <label class="switch">
+                    <input type="checkbox" id="always-fullscreen">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="selector">
+                <label for="style-mode">Timer Style: </label>
+                <select id="style-mode">
+                    <option value="default">Default</option>
+                    <option value="minimal">Minimal</option>
+                    <option value="digital">Digital</option>
+                    <option value="pomodoro">Pomodoro</option>
+                    <option value="analog">Analog</option>
+                    <option value="neon">Neon</option>
+                </select>
+            </div> -->
+            <h2>Timer Default</h2>
+            <!-- <div class="selector">
+                <label for="focus-mode">Preset: </label>
+                <select id="focus-mode">
+                    <option value="default">Select Preset</option>
+                    <option value="quick">Quick Session</option>
+                    <option value="deep">Deep Session</option>
+                    <option value="study">Study Session</option>
+                    <option value="work">Work Session</option>
+                </select>
+            </div> -->
+            <div class="default-session">
+                <label>Default Focus Session: (min | sec)</label>
+                <div class="timer-time">
+                    <input type="number" class="time-minute" min="5" max="180" value="25" id="focus-session-minutes">
+                    <input type="number" class="time" min="5" max="59" value="0" id="focus-session-seconds">
+                </div>
+            </div>
+            <div class="default-session">
+                <label>Default Break Session: (min | sec)</label>
+                <div class="timer-time">
+                    <input type="number" class="time-minute" min="5" max="180" value="25" id="break-session-minutes">
+                    <input type="number" class="time" min="5" max="59" value="0" id="break-session-seconds">
+                </div>
+            </div>
+            <!-- <div class="switcher">
+                <label for="always-focus">Auto-start next session</label>
+                <label class="switch">
+                    <input type="checkbox" id="auto-start-sessions">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="switcher">
+                <label for="always-focus">Auto-start breaks</label>
+                <label class="switch">
+                    <input type="checkbox" id="auto-start-breaks">
+                    <span class="slider round"></span>
+                </label>
+            </div> -->
+            <h2>Shop</h2>
+            <div class="shop-container">
+                <div class="shop-item purple-shadow" id="purple-shadow" data-price="300" data-type="shadow" data-color="#b300cc" style="margin-left: 34px;">
+                    <i class="fa-solid fa-circle"></i>
+                    <div class="item-info">
+                        <h4 class="item-name">Purple Glow</h4>
+                        <h3 class="price-title">Shadow Color</h3>
+                        <span class="price">300 AP</span>
+                    </div>
+                </div>
+                <div class="shop-item red-shadow" id="red-shadow" data-price="300" data-type="shadow" data-color="#ff0066">
+                    <i class="fa-solid fa-circle"></i>
+                    <div class="item-info">
+                        <h4 class="item-name">Red Glow</h4>
+                        <h3 class="price-title">Shadow Color</h3>
+                        <span class="price">300 AP</span>
+                    </div>
+                </div>
+                <div class="shop-item cyan-shadow" id="cyan-shadow" data-price="300" data-type="shadow" data-color="#00ffff">
+                    <i class="fa-solid fa-circle"></i>
+                    <div class="item-info">
+                        <h4 class="item-name">Cyan Glow</h4>
+                        <h3 class="price-title">Shadow Color</h3>
+                        <span class="price">300 AP</span>
+                    </div>
+                </div>
+                <div class="shop-item gold-shadow" id="gold-shadow" data-price="500" data-type="shadow" data-color="#ffd700" style="margin-left: 34px;">
+                    <i class="fa-solid fa-circle"></i>
+                    <div class="item-info">
+                        <h4 class="item-name">Gold Glow</h4>
+                        <h3 class="price-title">Shadow Color</h3>
+                        <span class="price">500 AP</span>
+                    </div>
+                </div>
+                <div class="shop-item green-shadow" id="green-shadow" data-price="400" data-type="shadow" data-color="#00ff00">
+                    <i class="fa-solid fa-circle"></i>
+                    <div class="item-info">
+                        <h4 class="item-name">Green Glow</h4>
+                        <h3 class="price-title">Shadow Color</h3>
+                        <span class="price">400 AP</span>
+                    </div>
+                </div>
+                <div class="shop-bonus double-ap" id="double-ap" data-price="500" data-type="bonus" data-multiplier="2">
+                    <span>×2</span>
+                    <div class="item-info">
+                        <h4 class="item-name">Double AP</h4>
+                        <h3 class="price-title">AP Multiplier</h3>
+                        <span class="price">500 AP</span>
+                    </div>
+                </div>
+                <div class="shop-bonus triple-ap" id="triple-ap" data-price="1000" data-type="bonus" data-multiplier="3" style="margin-left: 34px;">
+                    <span>×3</span>
+                    <div class="item-info">
+                        <h4 class="item-name">Triple AP</h4>
+                        <h3 class="price-title">AP Multiplier</h3>
+                        <span class="price">1000 AP</span>
+                    </div>
+                </div>
+                <div class="shop-bonus quadra-ap" id="quadra-ap" data-price="2000" data-type="bonus" data-multiplier="4">
+                    <span>×4</span>
+                    <div class="item-info">
+                        <h4 class="item-name">Quadra AP</h4>
+                        <h3 class="price-title">AP Multiplier</h3>
+                        <span class="price">2000 AP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main>
+            <div class="page-title">
+                <div class="title-border"></div>
+                <h2>Personal Tracker</h2>
+                <div class="title-border"></div>
+            </div>
+
+            <div class="tracker-circle" id="tracker-circle">
+                <video autoplay muted loop playsinline id="background-video">
+                    <source src="./Gojo.mp4" type="video/mp4">
+                </video>
+                <!-- <img src="profile.jpg" id="background-image"> -->
+                <h3 class="tracker-timer" id="timer">00:00</h3>
+                <div class="tracker-start-btn" role="button" id="start-btn"><i class="fa-solid fa-play"></i></div>
+                <div class="controllers" id="controllers">
+                    <div class="tracker-btn" role="button" id="stop-btn"><i class="fa-solid fa-stop"></i></div>
+                    <div class="tracker-btn" role="button" id="continue-btn"><i class="fa-solid fa-play"></i></div>
+                    <div class="tracker-btn" role="button" id="pause-btn"><i class="fa-solid fa-pause"></i></div>
+                </div>
+            </div>
+
+            <button class="configuration-btn" id="config-btn">Configuration</button>
+        </main>
+    </div>
+    <script src="main.js"></script>
+    <script src="tracker.js"></script>
+</body>
+</html>

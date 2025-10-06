@@ -1,0 +1,408 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: sans-serif;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+header {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 6rem;
+    max-width: 100vw;
+    background-image: linear-gradient(360deg, #202235 64%, #011e42 100%);
+    color: aliceblue;
+    border-bottom: 0.5px solid #BABABA;
+    z-index: 2;
+    padding: 0.5rem 0;
+    top: 0;
+    left: 0;
+}
+
+main {
+    margin-top: 6rem;
+    flex: 1;
+    width: 100%;
+    background-image: linear-gradient(360deg, #0B0C10 83%, #212338 100%);
+    min-height: calc(100vh - 6rem);
+    padding: 1rem;
+}
+
+h1 {
+    margin: 0;
+}
+
+
+.dark-light-switch {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dark-light-switch:hover {
+    transform: scale(1.5);
+    text-shadow: 0 0 10px #ff0000;
+}
+
+.header-title {
+    margin: 0.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: rgb(203, 203, 203);
+    text-shadow:
+                -1px -1px 0 #fff,
+                1px -1px 0 #fff,
+                -1px 1px 0 #fff,
+                1px 1px 0 #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.header-title::after {
+    content: "☰";
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    display: none;
+    transition: transform 0.3s ease;
+}
+
+.header-title.menu-open::after {
+    transform: rotate(90deg);
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    justify-content: space-evenly;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    align-items: center;
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.nav-container.mobile-hidden {
+    max-height: 0;
+    padding: 0 1rem;
+    opacity: 0;
+}
+
+.nav-container.mobile-visible {
+    flex-direction: column;
+    max-height: 500px;
+    opacity: 1;
+}
+
+.nav-item, .nav-first-item {
+    padding: 0.5rem 1.5rem;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+    transition: all ease-out 0.2s;
+    white-space: nowrap;
+    text-align: center;
+    min-width: fit-content;
+}
+
+.nav-first-item {
+    padding: 0.5rem 1.5rem;
+}
+
+.nav-item:hover,
+.nav-first-item:hover {
+    text-shadow: 0px 0px 20px #ff37de;
+    transform: scale(1.1);
+}
+
+.page-title {
+    text-align: center;
+}
+
+.page-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-title h2 {
+    display: inline-block;
+    border: 2px solid #BABABA;
+    color: rgb(255, 254, 254);
+    padding: 0.8rem 2rem;
+    border-radius: 0.8rem;
+    text-shadow: 0 0 10px #ff37de;
+    font-size: 2rem;
+    text-align: center;
+    margin: 0;
+}
+
+.title-border {
+    border: 0.5px solid #fff;
+    height: 1px;
+    width: 20%;
+    min-width: 50px;
+    max-width: 300px;
+    flex-shrink: 1;
+}
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.5);
+    animation: twinkle 2s infinite alternate;
+}
+
+@media (max-width: 575.98px) {
+    .header-title {
+        font-size: 1rem;
+        margin: 0.3rem;
+        justify-content: space-between;
+        padding: 0 1rem;
+        cursor: pointer;
+    }
+    
+    .header-title::after {
+        content: '☰';
+        font-size: 1.2rem;
+        display: block;
+    }
+    
+    .nav-container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        font-size: 0.7rem;
+        background: linear-gradient(180deg, #202235 0%, #011e42 100%);
+        border-top: 1px solid #324E96;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .nav-container.mobile-visible {
+        padding: 0.5rem 0;
+        max-height: 300px;
+        opacity: 1;
+    }
+    
+    .nav-item, .nav-first-item {
+        border-left: none;
+        border-bottom: 1px solid #324E96;
+        padding: 0.8rem 1rem;
+        margin-bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: rgba(50, 78, 150, 0.1);
+        transition: all 0.2s ease;
+    }
+    
+    .nav-item:hover, .nav-first-item:hover {
+        background: rgba(50, 78, 150, 0.3);
+        transform: none;
+    }
+    
+    .nav-first-item {
+        border-bottom: 1px solid #324E96;
+    }
+    
+    main {
+        margin-top: 6rem;
+        padding: 0.5rem;
+    }
+    
+    .page-title {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .page-title h2 {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .title-border {
+        width: 30%;
+        min-width: 40px;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .header-title {
+        font-size: 1.1rem;
+        justify-content: space-between;
+        padding: 0 1rem;
+        cursor: pointer;
+    }
+    
+    .header-title::after {
+        content: '☰';
+        font-size: 1.2rem;
+        display: block;
+    }
+    
+    .nav-container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        font-size: 0.8rem;
+        background: linear-gradient(180deg, #202235 0%, #011e42 100%);
+        border-top: 1px solid #324E96;
+        max-height: 0;
+        opacity: 0;
+        padding: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .nav-container.mobile-visible {
+        padding: 0.5rem 0;
+        max-height: 250px;
+        opacity: 1;
+    }
+    
+    .nav-item, .nav-first-item {
+        padding: 0.6rem 1rem;
+        flex: none;
+        width: 100%;
+        text-align: center;
+        border-left: none;
+        border-bottom: 1px solid #324E96;
+        background: rgba(50, 78, 150, 0.1);
+        transition: all 0.2s ease;
+    }
+    
+    .nav-item:hover, .nav-first-item:hover {
+        background: rgba(50, 78, 150, 0.3);
+        transform: none;
+    }
+    
+    main {
+        margin-top: 6rem;
+    }
+    
+    .page-title h2 {
+        font-size: 1.5rem;
+        padding: 0.6rem 1.5rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .header-title {
+        font-size: 1rem;
+    }
+    
+    .nav-container {
+        font-size: 0.9rem;
+        gap: 0.4rem;
+    }
+    
+    .nav-item, .nav-first-item {
+        padding: 0.5rem 0 0.5rem 1.2rem;
+    }
+    
+    main {
+        margin-top: 6rem;
+    }
+    
+    .page-title h2 {
+        font-size: 1.5rem;
+        padding: 0.7rem 1.8rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .header-title {
+        font-size: 1rem;
+    }
+    
+    .nav-container {
+        font-size: 1rem;
+        gap: 0.5rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .nav-item, .nav-first-item {
+        padding: 0.5rem 0 0.5rem 1.5rem;
+    }
+    
+    main {
+        margin-top: 6rem;
+    }
+    
+    .page-title h2 {
+        font-size: 1.5rem;
+        padding: 0.8rem 2rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .header-title {
+        font-size: 1rem;
+    }
+    
+    .nav-container {
+        font-size: 1.1rem;
+        gap: 0.6rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .nav-item, .nav-first-item {
+        padding: 0.6rem 0 0.6rem 1.8rem;
+    }
+    
+    main {
+        margin-top: 6rem;
+    }
+    
+    .page-title h2 {
+        font-size: 1.5rem;
+        padding: 0.9rem 2.5rem;
+    }
+    
+    .title-border {
+        width: 25%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .header-title {
+        font-size: 1.1rem;
+    }
+    
+    .nav-container {
+        font-size: 1.2rem;
+        max-width: 1400px;
+    }
+    
+    .page-title h2 {
+        font-size: 1.5rem;
+        padding: 1rem 3rem;
+    }
+}

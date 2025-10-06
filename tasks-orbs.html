@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="tasks.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Task Management</title>
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <h1 class="title">Auro<span class="dark-light-switch" id="dark-light-switch">🌜</span>ore</h1>
+            <!-- <div class="auth-btn-container">
+                <button class="login-btn">Login</button>
+                <button class="signup-btn">Signup</button>
+            </div> -->
+        </div>
+        <nav class="nav-container">
+            <a class="nav-first-item">Profile</a>
+            <a class="nav-item">LeaderBoard</a>
+            <a class="nav-item">Tracker</a>
+            <a class="nav-item">Tasks</a>
+            <a class="nav-item">Learning Paths</a>
+            <a class="nav-item">TEAMS</a>
+            <a class="nav-item">Portfolio</a>
+            <a class="nav-item">Aura Battle</a>
+        </nav>
+    </header>
+    <main>
+        <div class="page-title">
+            <div class="title-border"></div>
+            <h2>Tasks Management</h2>
+            <div class="title-border"></div>
+        </div>
+        <div class="tabs">
+            <div class="tabs-first-half">
+                <button class="tab-btn active">Today</button>
+                <button class="tab-btn">Upcoming</button>
+            </div>
+            <div class="tabs-second-half">
+                <button class="tab-btn">Completed</button>
+                <button class="tab-btn">Stats</button>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="tasks-orbs-container">
+                <div class="tasks-orbs-up">
+                    <div class="task-orb" data-id="3">
+                        <div class="task-info"></div>
+                        <div class="task-time"></div>
+                        <div class="subtasks">
+                            <div class="subtask-orb"></div>
+                        </div>
+                        <div class="task-panel">
+                            <div class="task-header">
+                                <h3 class="task-name"></h3>
+                                <div class="task-priority"></div>
+                                <div class="completion-mark"></div>
+                            </div>
+                            <div class="task-body">
+                                <h4 class="task-description"></h4>
+                                <div class="task-categories">
+                                    <span class="task-category"></span>
+                                </div>
+                                <div class="task-time">
+                                    <span class="task-due-date"></span>
+                                    <span class="task-duration"></span>
+                                </div>
+                                <progress value="20" max="100"></progress>
+                            </div>
+                            <div class="task-btns">
+                                <button class="add-note-btn"></button>
+                                <button class="start-tracking-btn"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-orb" data-id="2">
+                        <div class="task-info"></div>
+                        <div class="task-time"></div>
+                        <div class="subtasks">
+                            <div class="subtask-orb"></div>
+                        </div>
+                        <div class="task-panel">
+                            <div class="task-header">
+                                <h3 class="task-name"></h3>
+                                <div class="task-priority"></div>
+                                <div class="completion-mark"></div>
+                            </div>
+                            <div class="task-body">
+                                <h4 class="task-description"></h4>
+                                <div class="task-categories">
+                                    <span class="task-category"></span>
+                                </div>
+                                <div class="task-time">
+                                    <span class="task-due-date"></span>
+                                    <span class="task-duration"></span>
+                                </div>
+                                <progress value="20" max="100"></progress>
+                            </div>
+                            <div class="task-btns">
+                                <button class="add-note-btn"></button>
+                                <button class="start-tracking-btn"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-orb" data-id="1">
+                        <div class="task-info"></div>
+                        <div class="task-time"></div>
+                        <div class="subtasks">
+                            <div class="subtask-orb"></div>
+                        </div>
+                        <div class="task-panel">
+                            <div class="task-header">
+                                <h3 class="task-name"></h3>
+                                <div class="task-priority"></div>
+                                <div class="completion-mark"></div>
+                            </div>
+                            <div class="task-body">
+                                <h4 class="task-description"></h4>
+                                <div class="task-categories">
+                                    <span class="task-category"></span>
+                                </div>
+                                <div class="task-time">
+                                    <span class="task-due-date"></span>
+                                    <span class="task-duration"></span>
+                                </div>
+                                <progress value="20" max="100"></progress>
+                            </div>
+                            <div class="task-btns">
+                                <button class="add-note-btn"></button>
+                                <button class="start-tracking-btn"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-orb" data-id="9">
+                        <div class="task-info"></div>
+                        <div class="task-time"></div>
+                        <div class="subtasks">
+                            <div class="subtask-orb"></div>
+                        </div>
+                        <div class="task-panel">
+                            <div class="task-header">
+                                <h3 class="task-name"></h3>
+                                <div class="task-priority"></div>
+                                <div class="completion-mark"></div>
+                            </div>
+                            <div class="task-body">
+                                <h4 class="task-description"></h4>
+                                <div class="task-categories">
+                                    <span class="task-category"></span>
+                                </div>
+                                <div class="task-time">
+                                    <span class="task-due-date"></span>
+                                    <span class="task-duration"></span>
+                                </div>
+                                <progress value="20" max="100"></progress>
+                            </div>
+                            <div class="task-btns">
+                                <button class="add-note-btn"></button>
+                                <button class="start-tracking-btn"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <svg class="task-lines"></svg>
+                <div class="tasks-orbs-down">
+                    <div class="task-orb" data-id="5">
+                        <div class="task-info"></div>
+                        <div class="task-time"></div>
+                    </div>
+                    <div class="task-orb" data-id="4">
+                        <div class="task-info"></div>
+                        <div class="task-time"></div>
+                    </div>
+                    <div class="task-orb" data-id="9">
+                        <div class="task-info"></div>
+                        <div class="task-time"></div>
+                    </div>
+                </div>
+            </div>
+            <button class="add-task-btn">Add Task</button>
+        </div>
+    </main>
+    <script src="main.js"></script>
+    <script src="tasks.js"></script>
+</body>
+</html>

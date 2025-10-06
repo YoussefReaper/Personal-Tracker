@@ -1,0 +1,206 @@
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    margin: -45px auto 0 auto;
+    gap: 400px;
+}
+
+.tabs-first-half,
+.tabs-second-half {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    width: 40vw;
+    gap: 100px;
+}
+
+.tab-btn {
+    padding: 10px 40px;
+    font-size: 20px;
+    font-weight: 700;
+    color: aliceblue;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 8px;
+}
+
+.tab-btn.active {
+    background-color: rgb(81, 0, 83);
+    /* background-color: #515151 */
+}
+
+.tasks-orbs-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    position: relative;
+    padding: 20vh;
+    width: 100vw;
+    height: calc(100% - 10vh);
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.task-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: calc(100vh - 190px);
+}
+
+.task-orb {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 10px solid #000000;
+    text-align: center;
+    transition: transform 0.2s;
+    background-color: #161616;
+    color: #fff;
+    white-space: nowrap;
+    overflow: visible;
+    box-shadow: 0 0 20px cyan;
+    flex: none;
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.task-orb:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgb(176, 2, 185);
+}
+
+.task-info {
+    font-size: 20px;
+    white-space: wrap;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+}
+
+.subtasks {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+}
+
+.task-time {
+    position: absolute;
+    bottom: -60px;
+    color: #5d5d5d;
+    font-weight: 700;
+    transition: all 0.6s;
+}
+
+.task-orb:hover .task-time {
+    color: rgb(220, 67, 207);
+    text-shadow: 0 0 40px rgb(255, 0, 0);
+}
+
+.task-lines line {
+  stroke: cyan;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px cyan);
+}
+
+.tasks-orbs-up {
+    display: flex;
+    gap: 450px;
+}
+
+.tasks-orbs-down {
+    display: flex;
+    gap: 450px;
+    margin-left: 280px;
+}
+
+.task-panel {
+    display: none;
+}
+
+.subtask-wrapper {
+  position: absolute;
+    --i: 0;
+    --count: 6;
+    --radius: 120px;
+
+    transform: rotate(calc(var(--i) * 360deg / var(--count)))
+                translate(var(--radius))
+                rotate(calc(var(--i) * -360deg / var(--count)))
+                translate(-50%, -50%);
+}
+
+.subtask-orb {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: 5px solid #000000;
+    color: #fff;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #000000;
+    box-shadow: 0 0 20px #a8001c;
+    white-space: wrap;
+    animation: float ease-in-out infinite 6s;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+    cursor: pointer;
+    animation: float 6s ease-in-out infinite;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.add-task-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid cyan;
+    box-shadow: 0 0 10px;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: 900;
+    background-color: #202235;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 2;
+}
+
+.add-task-btn:hover {
+    box-shadow: 0 0 10px #a8001c;
+    border: 1px solid #a8001c;
+}
+
+@keyframes float {
+  0%   { transform: translate(-50%, -50%) translateY(0); }
+  50%  { transform: translate(-50%, -50%) translateY(8px); }
+  100% { transform: translate(-50%, -50%) translateY(0); }
+}
