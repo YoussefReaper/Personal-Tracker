@@ -57,14 +57,14 @@
 .configuration-panel {
     background-color: #141414;
     color: aliceblue;
-    margin-top: 6rem;
-    width: 66vmin;
-    height: calc(100vh - 6rem);
+    margin-top: 4.7rem;
+    width: 70vmin;
+    height: calc(100vh - 4.7rem);
     border-right: 4px solid #4a4a4a;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    margin-left: -66vmin;
+    margin-left: -70vmin;
     transition: margin 0.3s ease;
     z-index: 100;
 }

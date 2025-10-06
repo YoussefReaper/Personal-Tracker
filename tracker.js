@@ -132,7 +132,7 @@ function controlConfigPanel() {
     if (isConfigPanelOpen) {
         configurationPanel.style.marginLeft = '0';
     } else {
-        configurationPanel.style.marginLeft = '-66vmin';
+        configurationPanel.style.marginLeft = '-70vmin';
     }
 }
 
