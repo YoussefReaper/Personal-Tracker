@@ -10,7 +10,6 @@ const circle = document.querySelector('.tracker-circle');
 const controllers = document.getElementById('controllers');
 const videoBackground = document.getElementById('background-video');
 
-//Configuration inputs
 const backgroundPreview = document.getElementById('background-preview');
 const backgroundUpload = document.getElementById('background-upload');
 
@@ -31,7 +30,6 @@ const focusSessionSeconds = document.getElementById('focus-session-seconds');
 const breakSessionMinutes = document.getElementById('break-session-minutes');
 const breakSessionSeconds = document.getElementById('break-session-seconds');
 
-//Coins System
 const coinsEl = document.getElementById('coins');
 const coinsIncreaseEl = document.getElementById('coins-increase');
 
@@ -65,7 +63,6 @@ renderCoins();
 
 (async function initializeApp() {
     try {
-        console.log('🚀 Initializing AuroCore Tracker...');
         await cleanupOldDatabases();
         await checkStorageQuota();
         
@@ -74,7 +71,7 @@ renderCoins();
         await previewBackground();
         console.log('✅ App initialized successfully!');
     } catch (error) {
-        console.error('❌ Error initializing app:', error);
+        console.error('Error initializing app:', error);
     }
 })();
 
@@ -86,24 +83,19 @@ focusSessionSeconds.addEventListener('change', changeTime);
 backgroundUpload.addEventListener('change', async () => {
   const files = backgroundUpload.files;
   if (files && files.length > 0) {
-    console.log('📎 File selected:', files[0]);
     try {
       if (currentPreviewState === 'main') {
           await saveBackground(files[0], 'main');
-          console.log('✅ Added main background');
       } else if (currentPreviewState === 'pause') {
           await saveBackground(files[0], 'pause');
-          console.log('✅ Added pause background');
       } else {
           await saveBackground(files[0], 'break');
-          console.log('✅ Added break background');
       }
       await previewBackground();
     } catch (error) {
-      console.error('❌ Error saving background:', error);
+      console.error('Error saving background:', error);
     }
   } else {
-    console.log('No file selected 😅');
   }
 });
 mainBackgroundBtn.addEventListener('click', async () => {
@@ -260,7 +252,6 @@ function switchMode() {
     } else {
         newFocusSession();
     }
-    console.log('🔄 Switched mode!');
 }
 
 function newFocusSession() {
@@ -307,7 +298,6 @@ async function previewBackground() {
                     <source src="${backgroundUrl}" type="video/mp4">
                 </video>
             `;
-            console.log(`📺 Previewing ${backgroundName} background`);
         } else {
             backgroundPreview.innerHTML = `
                 <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; font-size: 14px;">
@@ -316,7 +306,7 @@ async function previewBackground() {
             `;
         }
     } catch (error) {
-        console.error('❌ Error previewing background:', error);
+        console.error('Error previewing background:', error);
         backgroundPreview.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #f00; font-size: 14px;">
                 Error loading background
@@ -344,22 +334,17 @@ async function changeBackgrounds() {
         if (backgroundUrl) {
             videoBackground.style.display = 'block';
             videoBackground.onerror = (e) => {
-                console.error('❌ Error loading video:', e);
-                console.error('Failed blob URL:', backgroundUrl);
+                console.error('Error loading video:', e);
                 loadBackground().then(() => {
-                    console.log('🔄 Backgrounds reloaded after error');
                 });
             };
             videoBackground.onloadeddata = () => {
-                console.log(`✅ Video loaded successfully for ${currentState} state`);
             };
             
-            console.log(`🎬 Setting ${currentState} background:`, backgroundUrl);
             videoBackground.src = backgroundUrl;
             videoBackground.load();
             videoBackground.play().catch(e => console.log('⚠️ Auto-play prevented:', e));
         } else {
-            console.log(`⚠️ No ${currentState} background available, loading from DB...`);
             await loadBackground();
             const retryUrl = currentState === 'focus' ? focusBackground : 
                             currentState === 'pause' ? pauseBackground : breakBackground;
@@ -369,7 +354,7 @@ async function changeBackgrounds() {
             }
         }
     } catch (error) {
-        console.error('❌ Error changing backgrounds:', error);
+        console.error('Error changing backgrounds:', error);
     }
 }
 
@@ -392,20 +377,15 @@ function calculateCoins(isFullSession = false) {
     if (isFullSession && timeSpent >= sessionStartTime) {
         amount = Math.floor(sessionStartTime / 60) * 10;
         amount *= sessionNumber;
-        console.log(`✅ Full session completed! Base earned: ${amount} coins`);
     } else if (timeSpent >= 60) {
         amount = Math.floor(timeSpent / 60) * 5;
-        console.log(`⚠️ Partial session: ${Math.floor(timeSpent / 60)} minutes. Base earned: ${amount} coins`);
     } else {
         amount = 0;
-        console.log('❌ Session too short, no coins awarded');
     }
 
     if (amount > 0) {
-        // Apply bonus multiplier if active
         if (apMultiplier > 1) {
             const bonusAmount = amount * (apMultiplier - 1);
-            console.log(`🎁 Bonus multiplier ×${apMultiplier}: +${bonusAmount} AP`);
             amount *= apMultiplier;
         }
         addCoins(amount);
@@ -454,8 +434,6 @@ function stopTimer() {
 
 async function saveBackground(file, type) {
     try {
-        console.log(`💾 Saving ${type} background: ${file.name} (${file.type})`);
-        
         const arrayBuffer = await file.arrayBuffer();
         const blob = new Blob([arrayBuffer], { type: file.type });
         
@@ -465,11 +443,10 @@ async function saveBackground(file, type) {
         
         const txCompletePromise = new Promise((resolve, reject) => {
             tx.oncomplete = () => {
-                console.log(`✅ Transaction completed for ${type} background`);
                 resolve(true);
             };
             tx.onerror = (e) => {
-                console.error(`❌ Transaction error for ${type}:`, e);
+                console.error(`Transaction error for ${type}:`, e);
                 reject(e);
             };
         });
@@ -484,10 +461,9 @@ async function saveBackground(file, type) {
         });
         
         putRequest.onerror = (e) => {
-            console.error(`❌ Put request error for ${type}:`, e);
+            console.error(`Put request error for ${type}:`, e);
             
             if (e.target.error.name === 'QuotaExceededError') {
-                console.error('💥 QUOTA EXCEEDED! Storage is full!');
                 alert('Storage quota exceeded! Please clear some space by:\n1. Clearing browser cache\n2. Deleting old backgrounds\n3. Uploading smaller video files');
             }
         };
@@ -508,12 +484,9 @@ async function saveBackground(file, type) {
             breakBackground = objectURL;
             breakBackgroundURL = objectURL;
         }
-        
-        console.log(`✅ ${type} background saved and loaded: ${file.name} - Blob URL: ${objectURL}`);
         return true;
         
     } catch (error) {
-        console.error(`❌ Error saving ${type} background:`, error);
         throw error;
     }
 }
@@ -521,11 +494,8 @@ async function saveBackground(file, type) {
 async function cleanupOldDatabases() {
     try {
         const databases = await indexedDB.databases();
-        console.log('🔍 Found databases:', databases.map(db => db.name));
-        
         const dbsToDelete = [];
         const keepDB = 'AuroCoreDB';
-        
         for (const dbInfo of databases) {
             if (dbInfo.name !== keepDB) {
                 dbsToDelete.push(dbInfo.name);
@@ -533,33 +503,27 @@ async function cleanupOldDatabases() {
         }
         
         if (dbsToDelete.length > 0) {
-            console.log('🗑️ Deleting old databases:', dbsToDelete);
-            
             for (const dbName of dbsToDelete) {
                 const deleteRequest = indexedDB.deleteDatabase(dbName);
                 
                 await new Promise((resolve, reject) => {
                     deleteRequest.onsuccess = () => {
-                        console.log(`✅ Deleted database: ${dbName}`);
                         resolve();
                     };
                     deleteRequest.onerror = (e) => {
-                        console.error(`❌ Error deleting database ${dbName}:`, e);
+                        console.error(`Error deleting database ${dbName}:`, e);
                         resolve();
                     };
                     deleteRequest.onblocked = () => {
-                        console.warn(`⚠️ Database ${dbName} deletion blocked (may be in use)`);
                         resolve();
                     };
                 });
             }
-            
-            console.log('✅ Database cleanup completed!');
         } else {
-            console.log('✅ No old databases to clean up');
+            //soMEATHING
         }
     } catch (error) {
-        console.error('❌ Error during database cleanup:', error);
+        console.error('Error during database cleanup:', error);
     }
 }
 async function checkStorageQuota() {
@@ -573,14 +537,12 @@ async function checkStorageQuota() {
             console.log(`💾 Storage: ${usageInMB}MB / ${quotaInMB}MB (${percentUsed}% used)`);
             
             if (percentUsed > 90) {
-                console.warn('⚠️ WARNING: Storage is over 90% full!');
                 alert('Storage is almost full! Consider clearing browser data or old files.');
             } else if (percentUsed > 75) {
-                console.warn('⚠️ Storage is over 75% full');
+                //IDK
             }
         }
     } catch (error) {
-        console.error('❌ Error checking storage quota:', error);
     }
 }
 
@@ -592,11 +554,8 @@ function openDB() {
             const db = event.target.result;
             if (!db.objectStoreNames.contains('backgrounds')) {
                 db.createObjectStore('backgrounds', { keyPath: 'id' });
-                console.log("🧱 Object store 'backgrounds' created!");
             }
         };
-
-        console.log(request);
         request.onsuccess = (event) => resolve(event.target.result);
         request.onerror = (event) => reject(event.target.error);
     });
@@ -618,49 +577,41 @@ async function loadBackground() {
                     const record = req.result;
                     if (record && record.blob) {
                         if (!(record.blob instanceof Blob) || record.blob.size === 0) {
-                            console.error(`❌ Invalid blob for ${key}`);
                             resolve(null);
                             return;
                         }
-                        
                         const objectURL = URL.createObjectURL(record.blob);
-                        console.log(`📦 Created blob URL for ${key}: ${objectURL}`);
-                        
                         if (key === 'main-background') {
                             focusBlob = record.blob;
                             focusBackground = objectURL;
                             focusBackgroundURL = objectURL;
-                            console.log(`✅ Loaded main background: ${record.name} (${(record.blob.size / 1024 / 1024).toFixed(2)}MB)`);
                         } else if (key === 'pause-background') {
                             pauseBlob = record.blob;
                             pauseBackground = objectURL;
                             pauseBackgroundURL = objectURL;
-                            console.log(`✅ Loaded pause background: ${record.name} (${(record.blob.size / 1024 / 1024).toFixed(2)}MB)`);
                         } else if (key === 'break-background') {
                             breakBlob = record.blob;
                             breakBackground = objectURL;
                             breakBackgroundURL = objectURL;
-                            console.log(`✅ Loaded break background: ${record.name} (${(record.blob.size / 1024 / 1024).toFixed(2)}MB)`);
                         }
                         resolve(objectURL);
                     } else {
-                        console.log(`⚠️ ${key} not found in database`);
+                        console.log(`${key} not found in database`);
                         resolve(null);
                     }
                 };
                 
                 req.onerror = (e) => {
-                    console.error(`❌ Error loading ${key}:`, e);
+                    console.error(`Error loading ${key}:`, e);
                     resolve(null);
                 };
             });
         });
         
         await Promise.all(promises);
-        console.log('🎬 Background loading complete!');
         return true;
     } catch (error) {
-        console.error('❌ Error in loadBackground:', error);
+        console.error('Error in loadBackground:', error);
         return false;
     }
 }
@@ -706,12 +657,9 @@ async function clearAllBackgrounds() {
         await new Promise((resolve, reject) => {
             const clearRequest = store.clear();
             clearRequest.onsuccess = () => {
-                console.log('✅ All backgrounds cleared from database');
-                
                 if (focusBackgroundURL) URL.revokeObjectURL(focusBackgroundURL);
                 if (pauseBackgroundURL) URL.revokeObjectURL(pauseBackgroundURL);
                 if (breakBackgroundURL) URL.revokeObjectURL(breakBackgroundURL);
-                
                 focusBackground = null;
                 pauseBackground = null;
                 breakBackground = null;
@@ -722,16 +670,14 @@ async function clearAllBackgrounds() {
                 resolve();
             };
             clearRequest.onerror = (e) => {
-                console.error('❌ Error clearing backgrounds:', e);
+                console.error('Error clearing backgrounds:', e);
                 reject(e);
             };
         });
-        
-        console.log('🗑️ All backgrounds have been cleared!');
         await checkStorageQuota();
         return true;
     } catch (error) {
-        console.error('❌ Error in clearAllBackgrounds:', error);
+        console.error('Error in clearAllBackgrounds:', error);
         return false;
     }
 }
@@ -767,7 +713,6 @@ function initializeShop() {
     }
     
     updateShopUI();
-    console.log('🛒 Shop initialized');
 }
 
 function handlePurchase(item) {
@@ -782,13 +727,11 @@ function handlePurchase(item) {
             activeShadowColor = color;
             localStorage.setItem('activeShadowColor', color);
             applyShadowColor(color);
-            console.log(`✨ Applied ${itemName} shadow`);
         } else if (type === 'bonus') {
             if (activeBonus === itemId) {
                 activeBonus = null;
                 apMultiplier = 1;
                 item.classList.remove('active');
-                console.log(`❌ Deactivated ${itemName}`);
             } else {
                 if (activeBonus) {
                     document.getElementById(activeBonus)?.classList.remove('active');
@@ -796,7 +739,6 @@ function handlePurchase(item) {
                 activeBonus = itemId;
                 apMultiplier = parseInt(item.dataset.multiplier);
                 item.classList.add('active');
-                console.log(`✅ Activated ${itemName} (×${apMultiplier})`);
             }
             localStorage.setItem('activeBonus', JSON.stringify(activeBonus));
         }
@@ -806,8 +748,7 @@ function handlePurchase(item) {
     if (auraPoints < price) {
         item.classList.add('insufficient-funds');
         setTimeout(() => item.classList.remove('insufficient-funds'), 1000);
-        alert(`❌ Not enough AP! You need ${price} AP but only have ${auraPoints} AP.`);
-        console.log(`❌ Insufficient funds for ${itemName}`);
+        alert(`Not enough AP! You need ${price} AP but only have ${auraPoints} AP.`)
         return;
     }
     auraPoints -= price;
@@ -831,16 +772,13 @@ function handlePurchase(item) {
     
     renderCoins();
     updateShopUI();
-    
-    console.log(`✅ Purchased ${itemName} for ${price} AP`);
-    alert(`✅ Successfully purchased ${itemName}!`);
+    alert(`Successfully purchased ${itemName}!`);
 }
 
 function applyShadowColor(color) {
     const circle = document.querySelector('.tracker-circle');
     if (circle) {
         circle.style.boxShadow = `0 0 40px ${color}`;
-        console.log(`🎨 Applied shadow color: ${color}`);
     }
 }
 
