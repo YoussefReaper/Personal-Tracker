@@ -69,7 +69,6 @@ renderCoins();
         await loadBackground();
         backgroundChanger();
         await previewBackground();
-        console.log('✅ App initialized successfully!');
     } catch (error) {
         console.error('Error initializing app:', error);
     }
@@ -343,7 +342,7 @@ async function changeBackgrounds() {
             
             videoBackground.src = backgroundUrl;
             videoBackground.load();
-            videoBackground.play().catch(e => console.log('⚠️ Auto-play prevented:', e));
+            videoBackground.play().catch(e => console.log('Auto-play prevented:', e));
         } else {
             await loadBackground();
             const retryUrl = currentState === 'focus' ? focusBackground : 
@@ -533,9 +532,6 @@ async function checkStorageQuota() {
             const usageInMB = (estimate.usage / (1024 * 1024)).toFixed(2);
             const quotaInMB = (estimate.quota / (1024 * 1024)).toFixed(2);
             const percentUsed = ((estimate.usage / estimate.quota) * 100).toFixed(1);
-            
-            console.log(`💾 Storage: ${usageInMB}MB / ${quotaInMB}MB (${percentUsed}% used)`);
-            
             if (percentUsed > 90) {
                 alert('Storage is almost full! Consider clearing browser data or old files.');
             } else if (percentUsed > 75) {
@@ -600,14 +596,12 @@ async function loadBackground() {
                         resolve(null);
                     }
                 };
-                
                 req.onerror = (e) => {
                     console.error(`Error loading ${key}:`, e);
                     resolve(null);
                 };
             });
         });
-        
         await Promise.all(promises);
         return true;
     } catch (error) {
